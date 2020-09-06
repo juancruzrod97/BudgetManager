@@ -1,0 +1,35 @@
+﻿@model IList<BudgetManager.Models.Operation>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Listado de Personas</h2>
+<a href="@Url.Action("AddOperation")">Add</a>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Concept</th>
+            <th>Value</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Username</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var operation in Model)
+        {
+            <tr>
+                <td>@operation.Concept</td>
+                <td>'$'@operation.Value</td>
+                <td>@operation.Date.ToString("dddd, dd MMMM yyyy")</td>
+                <td>@operation.Type</td>
+                <td>@operation.IdCategory </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { Id = operation.IdOperation })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Delete", new { Id = operation.IdOperation })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

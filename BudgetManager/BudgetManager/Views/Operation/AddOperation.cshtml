@@ -1,0 +1,51 @@
+﻿@model BudgetManager.Models.Operation
+@{
+    ViewBag.Title = "AddOperation";
+}
+
+<h2>Add operation</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group">
+                @Html.LabelFor(operation => operation.Concept, new { @class = "control-label" })
+                @Html.TextBoxFor(operation => operation.Concept, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                @Html.LabelFor(operation => operation.Value, new { @class = "control-label"})
+                @Html.TextBoxFor(operation => operation.Value, "{0:G29}", new { @class = "form-control", @type = "number" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group">
+                @Html.LabelFor(operation => operation.Date, new { @class = "control-label" })
+                @Html.TextBoxFor(operation => operation.Date, new { @class = "form-control", @type = "date" })
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                @Html.LabelFor(operation => operation.Type, new { @class = "control-label" })
+                @Html.DropDownListFor(operation => operation.Type, ViewBag.Types as List<SelectListItem>, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group">
+                @Html.LabelFor(operation => operation.Category, new { @class = "control-label" })
+                @Html.TextBoxFor(operation => operation.Category, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <a href="@Url.Action("Index")" class="btn btn-default">Go back</a>
+        <input type="submit" value="Guardar" class="btn btn-success" />
+    </div>
+}
