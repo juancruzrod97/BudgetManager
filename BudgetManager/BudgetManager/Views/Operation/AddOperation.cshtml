@@ -28,24 +28,18 @@
                 @Html.TextBoxFor(operation => operation.Date, new { @class = "form-control", @type = "date" })
             </div>
         </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                @Html.LabelFor(operation => operation.Type, new { @class = "control-label" })
-                @Html.DropDownListFor(operation => operation.Type, ViewBag.Types as List<SelectListItem>, new { @class = "form-control" })
-            </div>
-        </div>
     </div>
     <div class="row">
         <div class="col-xs-6">
             <div class="form-group">
-                @Html.LabelFor(operation => operation.Category, new { @class = "control-label" })
-                @Html.TextBoxFor(operation => operation.Category, new { @class = "form-control" })
+                @Html.LabelFor(operation => operation.IdCategory, new { @class = "control-label" })
+                @Html.DropDownListFor(operation => operation.IdCategory, (IEnumerable<SelectListItem>)ViewBag.Categories, new { @class = "form-control" })
             </div>
         </div>
     </div>
     <hr />
     <div class="row">
         <a href="@Url.Action("Index")" class="btn btn-default">Go back</a>
-        <input type="submit" value="Guardar" class="btn btn-success" />
-    </div>
+        <input type="submit" value="Save" class="btn btn-success" />
+    </div> 
 }

@@ -11,6 +11,7 @@
           </Key>
           <Property Name="IdCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
         <EntityType Name="Operation">
           <Key>
@@ -20,18 +21,17 @@
           <Property Name="Concept" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Value" Type="decimal" Precision="20" Scale="2" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="Type" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="IdCategory" Type="int" Nullable="false" />
           <Property Name="IdUser" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="UserProfile">
           <Key>
             <PropertyRef Name="IdUser" />
           </Key>
           <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK__Operation__IdCat__29572725">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -45,11 +45,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Operation__IdUse__2A4B4B5E">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+        <Association Name="FK__Operation__IdUse__36B12243">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
           <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="UserProfile">
               <PropertyRef Name="IdUser" />
             </Principal>
             <Dependent Role="Operation">
@@ -60,13 +60,13 @@
         <EntityContainer Name="BM_DataBaseModelStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Operation" EntityType="Self.Operation" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Operation__IdCat__29572725" Association="Self.FK__Operation__IdCat__29572725">
             <End Role="Category" EntitySet="Category" />
             <End Role="Operation" EntitySet="Operation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Operation__IdUse__2A4B4B5E" Association="Self.FK__Operation__IdUse__2A4B4B5E">
-            <End Role="User" EntitySet="User" />
+          <AssociationSet Name="FK__Operation__IdUse__36B12243" Association="Self.FK__Operation__IdUse__36B12243">
+            <End Role="UserProfile" EntitySet="UserProfile" />
             <End Role="Operation" EntitySet="Operation" />
           </AssociationSet>
         </EntityContainer>
@@ -81,6 +81,7 @@
           </Key>
           <Property Name="IdCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Operation" Relationship="Self.FK__Operation__IdCat__29572725" FromRole="Category" ToRole="Operation" />
         </EntityType>
         <EntityType Name="Operation">
@@ -91,21 +92,20 @@
           <Property Name="Concept" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Value" Type="Decimal" Precision="20" Scale="2" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdCategory" Type="Int32" Nullable="false" />
           <Property Name="IdUser" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK__Operation__IdCat__29572725" FromRole="Operation" ToRole="Category" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Operation__IdUse__2A4B4B5E" FromRole="Operation" ToRole="User" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.FK__Operation__IdUse__36B12243" FromRole="Operation" ToRole="UserProfile" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="UserProfile">
           <Key>
             <PropertyRef Name="IdUser" />
           </Key>
           <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Operation" Relationship="Self.FK__Operation__IdUse__2A4B4B5E" FromRole="User" ToRole="Operation" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Operation" Relationship="Self.FK__Operation__IdUse__36B12243" FromRole="UserProfile" ToRole="Operation" />
         </EntityType>
         <Association Name="FK__Operation__IdCat__29572725">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -119,11 +119,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Operation__IdUse__2A4B4B5E">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+        <Association Name="FK__Operation__IdUse__36B12243">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
           <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
+            <Principal Role="UserProfile">
               <PropertyRef Name="IdUser" />
             </Principal>
             <Dependent Role="Operation">
@@ -134,13 +134,13 @@
         <EntityContainer Name="BM_DataBaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="Operation" EntityType="Self.Operation" />
-          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" />
           <AssociationSet Name="FK__Operation__IdCat__29572725" Association="Self.FK__Operation__IdCat__29572725">
             <End Role="Category" EntitySet="Category" />
             <End Role="Operation" EntitySet="Operation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Operation__IdUse__2A4B4B5E" Association="Self.FK__Operation__IdUse__2A4B4B5E">
-            <End Role="User" EntitySet="User" />
+          <AssociationSet Name="FK__Operation__IdUse__36B12243" Association="Self.FK__Operation__IdUse__36B12243">
+            <End Role="UserProfile" EntitySet="UserProfile" />
             <End Role="Operation" EntitySet="Operation" />
           </AssociationSet>
         </EntityContainer>
@@ -155,6 +155,7 @@
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -165,19 +166,18 @@
                 <ScalarProperty Name="Concept" ColumnName="Concept" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="BM_DataBaseModel.User">
-              <MappingFragment StoreEntitySet="User">
+          <EntitySetMapping Name="UserProfile">
+            <EntityTypeMapping TypeName="BM_DataBaseModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -11,18 +11,19 @@ namespace BudgetManager.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Operation
     {
         public int IdOperation { get; set; }
         public string Concept { get; set; }
         public decimal Value { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime Date { get; set; }
-        public string Type { get; set; }
         public int IdCategory { get; set; }
         public int IdUser { get; set; }
     
         public virtual Category Category { get; set; }
-        public virtual User User { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
     }
 }

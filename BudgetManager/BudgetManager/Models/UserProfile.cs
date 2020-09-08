@@ -12,18 +12,18 @@ namespace BudgetManager.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class UserProfile
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public UserProfile()
         {
             this.Operation = new HashSet<Operation>();
         }
     
         public int IdUser { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string FullName { get; set; }
         public string Email { get; set; }
+        public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Operation> Operation { get; set; }

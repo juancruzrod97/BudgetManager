@@ -2,8 +2,8 @@
 @{
     ViewBag.Title = "Index";
 }
-<h2>Listado de Personas</h2>
-<a href="@Url.Action("AddOperation")">Add</a>
+<h2>Operations</h2>
+<a href="@Url.Action("AddOperation")" class="btn btn-primary">Add</a>
 <hr />
 <table class="table">
     <thead>
@@ -14,6 +14,7 @@
             <th>Type</th>
             <th>Category</th>
             <th>Username</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -21,15 +22,25 @@
         {
             <tr>
                 <td>@operation.Concept</td>
-                <td>'$'@operation.Value</td>
+                <td>$@operation.Value</td>
                 <td>@operation.Date.ToString("dddd, dd MMMM yyyy")</td>
-                <td>@operation.Type</td>
-                <td>@operation.IdCategory </td>
+                <td>@operation.Category.Type</td>
+                <td>@operation.Category.Name </td>
+                <td>@operation.UserProfile.FullName </td>
                 <td>
-                    <a href="@Url.Action("Edit", new { Id = operation.IdOperation })" class="btn btn-warning">Edit</a>
-                    <a href="@Url.Action("Delete", new { Id = operation.IdOperation })" class="btn btn-danger">Delete</a>
+                    <a href="@Url.Action("EditOperation", new { Id = operation.IdOperation })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("DeleteOperation", new { Id = operation.IdOperation })" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Balance</th>
+        <th>@ViewBag.Balance</th>
+    </tr>
     </tbody>
 </table>
